@@ -89,16 +89,8 @@ var guaranteedChar = [];
 var finalPassword = [];
 var choices = 0;
 
-// prompt user for password criteria
-
-//function for randomizing elements from an array
-
+// prompt user for selecting password criteria
 function generatePassword() {
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
-
-  // passwordText.value = password;
-
   var length = parseInt(
     prompt("How many characters would you like your password to be?")
   );
@@ -110,20 +102,21 @@ function generatePassword() {
     );
     return null;
   }
-  //conditional to check greater than 8
   if (length < 8) {
     alert("Pass length has to be 8 or more characters");
     return null;
   }
-  //conditional to check less that 128
   if (length > 128) {
     alert("Password length has to be less than 128 characters");
     return null;
   }
-  //conditional to check whether a user wants lower upper numbers or special
+  //setting criteria to true and pushing one random character from the chosen array at a time x4
   var hasLowerCase = confirm(
     "Do you want your password to include lower case letters?"
   );
+  //resets array everytime you want a new password
+  guaranteedChar = [];
+
   if (hasLowerCase === true) {
     possibleChar = possibleChar.concat(lowerCase);
     guaranteedChar.push(
@@ -168,7 +161,7 @@ function generatePassword() {
     alert("Must chose one char type");
     writePassword();
   }
-  //objest to store user inputs
+  //object to store user inputs
   // var passwordOptions = {
   //   length: length,
   //   hasLowerCase: hasLowerCase,
@@ -183,8 +176,9 @@ function generatePassword() {
     );
   }
 
-  console.log(guaranteedChar);
+  // console.log(guaranteedChar);
 
+  // fisher-yates algorithm to shuffle array before printing password
   function shuffleArray(guaranteedChar) {
     var current = guaranteedChar.length;
     while (current != 0) {
@@ -195,17 +189,17 @@ function generatePassword() {
       guaranteedChar[random] = temp;
     }
     return guaranteedChar;
-
-    // choices = 0;
+    //changing array into a string
   }
   finalPassword = shuffleArray(guaranteedChar).join("");
   return finalPassword;
 }
-
+//suplied code to print password to html using the dom
 var generateBtn = document.querySelector("#generate");
-
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
+
+//thank you for coming to my tom talk
