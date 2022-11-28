@@ -114,8 +114,9 @@ function generatePassword() {
   var hasLowerCase = confirm(
     "Do you want your password to include lower case letters?"
   );
-  //resets array everytime you want a new password
+  //resets gauranteedChar and choices everytime you want a new password
   guaranteedChar = [];
+  choices = 0;
 
   if (hasLowerCase === true) {
     possibleChar = possibleChar.concat(lowerCase);
